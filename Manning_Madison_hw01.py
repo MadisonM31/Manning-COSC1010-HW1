@@ -1,9 +1,9 @@
 # Madison Manning           
 # UWYO COSC 1010
-# 10/15/2025
+# 10/15/2024
 # HW 01
 # Lab Section: 10
-# Sources, people worked with, help given to: 
+# Sources, people worked with, help given to: Thank you to Iqbal Khatoon during office hours and my COSC1010 lecture notes
 
 # Homework Question:
 # 
@@ -27,14 +27,13 @@ students = [
 # whose average score is greater than 80.
 
 #Solution
-student_avrg = {}
-score_avrg = 0
 
+student_avrg = {}
 
 for student in students: 
-    score_avrg = sum(student["scores"].values()) / 3
-    student_avrg[student["name"]] = score_avrg
+    student_avrg[student["name"]] = sum(student["scores"].values()) / 3
 
+print(student_avrg)
 
 for name, score in student_avrg.items():
     if score > 80:
