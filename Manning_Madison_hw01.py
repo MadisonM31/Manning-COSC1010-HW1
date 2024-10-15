@@ -34,10 +34,11 @@ score_avrg = 0
 for student in students: 
     score_avrg = sum(student["scores"].values()) / 3
     student_avrg[student["name"]] = score_avrg
-    if score_avrg > 80:
-        print(f"{student["name"]} has an average score above 80")
 
-     
+
+for name, score in student_avrg.items():
+    if score > 80:
+        print(f"{name} has an average score above 80")
     
     
 
