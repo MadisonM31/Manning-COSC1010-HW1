@@ -2,16 +2,17 @@ import openpyxl
 from openpyxl.styles import Color, PatternFill
 from openpyxl.utils import get_column_letter
 
-art_book = openpyxl.Workbook()
-sheet = art_book.active
+new_art = openpyxl.Workbook()
+sheet = new_art.active
 
 #Setting cell sizes
 for row in range(1, 55):
-    sheet.row_dimensions[row].height = 6
+    sheet.row_dimensions[row].height = 8.5
 for column in range(1,53):
     column_letter = get_column_letter(column)
     sheet.column_dimensions[column_letter].width = 1
-art_book.save("new_art.xlsx")
+new_art.save("new_art.xlsx")
+
 
 #Setting cell colors
 black = 'FF010101'
@@ -40,9 +41,8 @@ black_list = ['R1', 'S1', 'T1', 'U1', 'V1', 'Q2', 'W2', 'Q3', 'W3', 'X3', 'Q4', 
 
 black_rgb = Color(rgb= '010101')
 
-for cell in black_list:
-    fill = PatternFill(patternType= 'solid', fgColor=black_rgb)
-    art_book.save("new_art.xlsx")
+fill_black = PatternFill(patternType= 'solid', fgColor=black_rgb)
+
 
 
 yellow = 'FFFFCD2D'
@@ -99,9 +99,7 @@ yellow_list = ['R2', 'S2', 'T2', 'U2', 'V2', 'R3', 'S3', 'T3', 'U3', 'V3', 'R4',
 
 yellow_rgb = Color(rgb= 'FFCD2D')
 
-for cell in yellow_list:
-    fill = PatternFill(patternType= 'solid', fgColor=yellow_rgb)
-    art_book.save("new_art.xlsx")
+fill_yel = PatternFill(patternType= 'solid', fgColor=yellow_rgb)
 
 pale_yellow = 'FFFFE285'
 fill_pyel = PatternFill(patternType = 'solid', fgColor=pale_yellow)
@@ -112,9 +110,7 @@ pale_yellow_list = ['AK17', 'AL17', 'AM17', 'AN17', 'AO17', 'AP17', 'AQ17', 'AI1
 
 pale_yellow_rgb = Color(rgb= 'FFE285')
 
-for cell in pale_yellow_list:
-    fill = PatternFill(patternType= 'solid', fgColor=pale_yellow_rgb)
-    art_book.save("new_art.xlsx")
+fill_pale = PatternFill(patternType= 'solid', fgColor=pale_yellow_rgb)
 
 red = 'FFC92403'
 fill_red = PatternFill(patternType = 'solid', fgColor=red)
@@ -129,9 +125,8 @@ red_list = ['AE30', 'AF30', 'AG30', 'AD31', 'AE31', 'AF31', 'AG31', 'AB32', 'AC3
 
 red_rgb = Color(rgb= 'C92403')
 
-for cell in red_list:
-    fill = PatternFill(patternType= 'solid', fgColor=red_rgb)
-    art_book.save("new_art.xlsx")
+fill_red = PatternFill(patternType= 'solid', fgColor=red_rgb)
+
 
 blue = 'FF99ACD1'
 fill_bl = PatternFill(patternType = 'solid', fgColor=blue)
@@ -144,35 +139,28 @@ blue_list = ['AT22', 'AH23', 'AJ23', 'AR23', 'AS23', 'AT23', 'AU23', 'AG24', 'AH
 
 blue_rgb = Color(rgb= '99ACD1')
 
-for cell in blue_list:
-    fill = PatternFill(patternType= 'solid', fgColor=blue_rgb)
-    art_book.save("new_art.xlsx")
+fill_blue = PatternFill(patternType= 'solid', fgColor=blue_rgb)
 
-#scraper
-'''
 
-wb = openpyxl.load_workbook("COSC1010_pixel_art.xlsx")
-sheet = wb.active
 cells = sheet['A1:BA55']
-color_dic = {'blk': [], 'yel' : [], 'p_yel' : [], 'r' : [], 'bl' : []}
 
 for row in sheet['A1:BA55']:
     for cell in row:
-        if cell.fill and cell.fill.fgColor:
-            color = cell.fill.fgColor.rgb
-            print(f"color: {color}")
-            if color == black:
-                color_dic['blk'].append(cell.coordinate)
-            elif color == yellow:
-                color_dic['yel'].append(cell.coordinate)
-            elif color == pale_yellow:
-                color_dic['p_yel'].append(cell.coordinate)
-            elif color == red:
-                color_dic['r'].append(cell.coordinate)
-            elif color == blue:
-                color_dic['bl'].append(cell.coordinate)
+        if cell in black_list:
+            sheet[cell].fill = fill_black
+        elif cell in yellow_list:
+            sheet[cell].fill = fill_yel
+        elif cell in pale_yellow_list:
+            sheet[cell].fill = fill_pale
+        elif cell in red_list:
+            sheet[cell].fill = fill_red
+        elif cell in blue_list:
+            sheet[cell].fill = fill_blue
+        else:
+            pass
+    
+new_art.save("new_art.xlsx")
 
 
-print(f"Yellow:", color_dic['bl'])
-        
-'''
+
+
